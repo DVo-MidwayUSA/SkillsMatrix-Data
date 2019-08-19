@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>MidwayUSA - Skills Map Manager</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://media.mwstatic.com/images/pagespecific/favicons/favicon-96x96.png"
+    />
+  </head>
+  <body>
+    <main>
+      <ul id="nodes"></ul>
+    </main>
+    <script>
+      const render = nodes => {
+        const items = nodes.map(node => {
+          return `<li>${node.id}, ${node.group}</li>`
+        })
+
+        const html = items.join("")
+        document.getElementById("nodes").innerHTML = html
+      }
+
+      fetch("/api/nodes")
+        .then(response => {
+          return response.json()
+        })
+        .then(render)
+    </script>
+  </body>
+</html>
