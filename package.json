@@ -1,0 +1,36 @@
+{
+  "name": "skillsmatrix-data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index.js",
+    "watch": "nodemon --exec babel-node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DVo-MidwayUSA/SkillsMatrix-Data.git"
+  },
+  "author": "dvo@midwayusa.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DVo-MidwayUSA/SkillsMatrix-Data/issues"
+  },
+  "homepage": "https://github.com/DVo-MidwayUSA/SkillsMatrix-Data#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "msnodesqlv8": "^0.8.3",
+    "mssql": "^5.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "nodemon": "^1.19.1"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  }
+}
