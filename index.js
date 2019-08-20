@@ -8,7 +8,7 @@ const PORT = 8888
 
 const byId = (a, b) => {
   let comparison = 0
-  if (a.id > b.id) comparison = 1
+  if (a.id.toUpperCase() > b.id.toUpperCase()) comparison = 1
   else comparison = -1
   return comparison
 }
