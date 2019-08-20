@@ -1,5 +1,5 @@
-import nodes from "./data/nodes/"
-import links from "./data/links/"
+import nodes from "../data/nodes"
+import links from "../data/links"
 
 const get = id =>
   new Promise(resolve => {

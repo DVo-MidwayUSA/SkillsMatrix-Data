@@ -1,7 +1,6 @@
 import express from "express"
-import path from "path"
-
 import data from "./data-access-temp"
+import { request } from "http"
 
 const app = new express()
 const PORT = 8888
@@ -13,6 +12,15 @@ const byId = (a, b) => {
   return comparison
 }
 
+app.use((request, response, next) => {
+  response.header("Access-Control-Allow-Origin", "*")
+  response.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  )
+  next()
+})
+
 app.get("/api/nodes", (request, response) => {
   data.get("nodes").then(nodes => {
     const sorted = [...nodes].sort(byId)
@@ -20,9 +28,7 @@ app.get("/api/nodes", (request, response) => {
   })
 })
 
-app.use("/", express.static(path.join(__dirname, "./public")))
-
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+  console.log(`API running on port ${PORT}`)
   console.log("CTRL + C to stop...")
 })
