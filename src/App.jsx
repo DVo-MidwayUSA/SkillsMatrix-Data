@@ -8,9 +8,9 @@ const App = props => {
       <thead>
         <tr>
           <th>Skill</th>
-          <th>Defnintion</th>
+          <th>Definition</th>
           <th>Group</th>
-          <th>weight</th>
+          <th>Weight</th>
           <th>&nbsp;</th>
         </tr>
         <TableHeadForm />
