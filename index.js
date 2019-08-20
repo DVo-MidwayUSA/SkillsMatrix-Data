@@ -1,7 +1,7 @@
 import express from "express"
 import path from "path"
 
-import data from "./data-access"
+import data from "./data-access-temp"
 
 const app = new express()
 const PORT = 8888

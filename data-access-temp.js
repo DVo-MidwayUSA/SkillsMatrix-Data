@@ -2,17 +2,15 @@ import nodes from "./data/nodes/"
 import links from "./data/links/"
 
 const get = id =>
-  ({
-    nodes: nodes,
-    links: links
-  }[id])
+  new Promise(resolve => {
+    if (id === "nodes") resolve(nodes)
+    else resolve(links)
+  })
 
-const update = (id, input) => {}
-
-const write = (id, input) => {}
+const generic = (id, input) => {}
 
 export default {
   get: get,
-  update: update,
-  write: write
+  update: generic,
+  write: generic
 }
