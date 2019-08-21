@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 const TableHead = () => {
   const [skill, setSkill] = useState({
@@ -11,6 +11,10 @@ const TableHead = () => {
   const onChange = event => {
     setSkill({ ...skill, [event.target.name]: event.target.value })
   }
+
+  useEffect(() => {
+    console.log(skill)
+  })
 
   return (
     <tr>
@@ -40,12 +44,6 @@ const TableHead = () => {
           value={skill.weight}
           onChange={onChange}
         />
-      </td>
-      <td>
-        {skill.id}
-        {skill.description}
-        {skill.group}
-        {skill.weight}
       </td>
     </tr>
   )
