@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react"
 
-const TableHead = () => {
-  const [skill, setSkill] = useState({
-    id: "",
-    description: "",
-    group: "",
-    weight: ""
-  })
+const TableRowForm = props => {
+  const [skill, setSkill] = useState(
+    props.skill || {
+      id: "",
+      description: "",
+      group: "",
+      weight: ""
+    }
+  )
 
   const onChange = event => {
-    setSkill({ ...skill, [event.target.name]: event.target.value })
+    const updatedSkill = { ...skill, [event.target.name]: event.target.value }
+    setSkill(updatedSkill)
+    props.onSkillChange(skill, updatedSkill)
   }
 
   useEffect(() => {
@@ -31,7 +35,7 @@ const TableHead = () => {
       </td>
       <td>
         <input
-          type="text"
+          type="number"
           name="group"
           value={skill.group}
           onChange={onChange}
@@ -39,7 +43,7 @@ const TableHead = () => {
       </td>
       <td>
         <input
-          type="text"
+          type="number"
           name="weight"
           value={skill.weight}
           onChange={onChange}
@@ -49,4 +53,4 @@ const TableHead = () => {
   )
 }
 
-export default TableHead
+export default TableRowForm
