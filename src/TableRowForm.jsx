@@ -16,10 +16,6 @@ const TableRowForm = props => {
     props.onSkillChange(skill, updatedSkill)
   }
 
-  useEffect(() => {
-    console.log(skill)
-  })
-
   return (
     <tr>
       <td>

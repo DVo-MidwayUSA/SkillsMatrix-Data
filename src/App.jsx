@@ -2,8 +2,18 @@ import React, { useState, useEffect } from "react"
 import ReactDOM from "react-dom"
 import TableRowForm from "./TableRowForm.jsx"
 
+const defaultSkill = {
+  id: "",
+  description: "",
+  group: "",
+  weight: ""
+}
+
 const App = () => {
   const [data, setData] = useState([])
+  const [newSkill, setNewSkill] = useState(() => {
+    return defaultSkill
+  })
 
   useEffect(() => {
     fetch("http://localhost:8888/api/nodes")
@@ -15,16 +25,16 @@ const App = () => {
 
   const onClick = event => {
     event.preventDefault()
-    setData(data)
+    setData([...data, newSkill])
+    setNewSkill(defaultSkill)
   }
 
   const updateSkill = (skill, updatedSkill) => {
     setData([...data.filter(element => element !== skill), updatedSkill])
   }
 
-  const addSkill = (skill, updateSkill) => {
-    console.log(skill)
-    console.log(updateSkill)
+  const addNewSkill = (skill, updateSkill) => {
+    setNewSkill({ ...updateSkill })
   }
 
   return (
@@ -39,7 +49,7 @@ const App = () => {
             <th>Weight</th>
             <th>&nbsp;</th>
           </tr>
-          <TableRowForm onSkillChange={addSkill} />
+          <TableRowForm skill={newSkill} onSkillChange={addNewSkill} />
         </thead>
         <tbody>
           {data.map((skill, index) => (
