@@ -1,6 +1,5 @@
 import express from "express"
 import data from "./data-access-temp"
-import { request } from "http"
 
 const app = new express()
 const PORT = 8888
@@ -23,7 +22,11 @@ app.use((request, response, next) => {
 
 app.get("/api/nodes", (request, response) => {
   data.get("nodes").then(nodes => {
-    const sorted = [...nodes].sort(byId)
+    const sorted = [
+      ...nodes.sort(byId).map((node, index) => {
+        return { key: index, ...node }
+      })
+    ]
     response.send(sorted).status(200)
   })
 })

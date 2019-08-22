@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react"
 
-const TableRowForm = props => {
-  const [skill, setSkill] = useState(
-    props.skill || {
-      id: "",
-      description: "",
-      group: "",
-      weight: ""
-    }
-  )
+const TableRow = props => {
+  const [skill, setSkill] = useState(props.skill)
 
   const onChange = event => {
     const updatedSkill = { ...skill, [event.target.name]: event.target.value }
     setSkill(updatedSkill)
     props.onSkillChange(skill, updatedSkill)
+  }
+
+  const remove = event => {
+    event.preventDefault()
+    props.onRemove(skill)
   }
 
   return (
@@ -45,8 +43,13 @@ const TableRowForm = props => {
           onChange={onChange}
         />
       </td>
+      <td>
+        <button title="Delete Skill" onClick={remove}>
+          x
+        </button>
+      </td>
     </tr>
   )
 }
 
-export default TableRowForm
+export default TableRow

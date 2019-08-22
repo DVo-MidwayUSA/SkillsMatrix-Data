@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from "react"
 import ReactDOM from "react-dom"
-import TableRowForm from "./TableRowForm.jsx"
-
-const defaultSkill = {
-  id: "",
-  description: "",
-  group: "",
-  weight: ""
-}
+import NewSkill from "./NewSkill.jsx"
+import TableRow from "./TableRow.jsx"
 
 const App = () => {
   const [data, setData] = useState([])
-  const [newSkill, setNewSkill] = useState(() => {
-    return defaultSkill
-  })
 
   useEffect(() => {
     fetch("http://localhost:8888/api/nodes")
@@ -23,23 +14,37 @@ const App = () => {
       .then(setData)
   }, [])
 
-  const onClick = event => {
-    event.preventDefault()
-    setData([...data, newSkill])
-    setNewSkill(defaultSkill)
+  const addSkill = skill => {
+    setData([...data, { ...skill, key: data.length }].sort(byId))
   }
 
   const updateSkill = (skill, updatedSkill) => {
-    setData([...data.filter(element => element !== skill), updatedSkill])
+    setData(
+      [...data.filter(element => element !== skill), updatedSkill].sort(byKey)
+    )
   }
 
-  const addNewSkill = (skill, updateSkill) => {
-    setNewSkill({ ...updateSkill })
+  const removeSkill = skill => {
+    setData([...data.filter(element => element !== skill)].sort(byId))
+  }
+
+  const byId = (a, b) => {
+    let comparison = 0
+    if (a.id.toUpperCase() > b.id.toUpperCase()) comparison = 1
+    else comparison = -1
+    return comparison
+  }
+
+  const byKey = (a, b) => {
+    let comparison = 0
+    if (a.key > b.key) comparison = 1
+    else comparison = -1
+    return comparison
   }
 
   return (
     <>
-      <button onClick={onClick}>Save</button>
+      <NewSkill onAdd={addSkill} />
       <table>
         <thead>
           <tr>
@@ -49,14 +54,14 @@ const App = () => {
             <th>Weight</th>
             <th>&nbsp;</th>
           </tr>
-          <TableRowForm skill={newSkill} onSkillChange={addNewSkill} />
         </thead>
         <tbody>
-          {data.map((skill, index) => (
-            <TableRowForm
-              key={index}
+          {data.map(skill => (
+            <TableRow
+              key={skill.key}
               skill={skill}
               onSkillChange={updateSkill}
+              onRemove={removeSkill}
             />
           ))}
         </tbody>
