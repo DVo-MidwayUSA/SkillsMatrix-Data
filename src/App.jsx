@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react"
 import ReactDOM from "react-dom"
-import NewSkill from "./NewSkill.jsx"
-import TableRow from "./TableRow.jsx"
+import SkillForm from "./SkillForm.jsx"
+import SkillTableRow from "./SkillTableRow.jsx"
 
 const App = () => {
   const [data, setData] = useState([])
+  const [formData, setFormData] = useState({
+    id: "",
+    description: "",
+    group: 1,
+    weight: 1
+  })
 
   useEffect(() => {
     fetch("http://localhost:8888/api/nodes")
@@ -28,6 +34,10 @@ const App = () => {
     setData([...data.filter(element => element !== skill)].sort(byId))
   }
 
+  const onEditSkill = skill => {
+    setFormData({ ...skill })
+  }
+
   const byId = (a, b) => {
     let comparison = 0
     if (a.id.toUpperCase() > b.id.toUpperCase()) comparison = 1
@@ -44,7 +54,6 @@ const App = () => {
 
   return (
     <>
-      <NewSkill onAdd={addSkill} />
       <table>
         <thead>
           <tr>
@@ -57,15 +66,17 @@ const App = () => {
         </thead>
         <tbody>
           {data.map(skill => (
-            <TableRow
+            <SkillTableRow
               key={skill.key}
               skill={skill}
-              onSkillChange={updateSkill}
-              onRemove={removeSkill}
+              onEdit={onEditSkill}
+              // onSkillChange={updateSkill}
+              // onRemove={removeSkill}
             />
           ))}
         </tbody>
       </table>
+      <SkillForm skill={formData} onAdd={addSkill} />
     </>
   )
 }
