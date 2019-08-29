@@ -32,8 +32,11 @@ const SkillForm = props => {
   return (
     <form onSubmit={handleSubmit} className="form">
       <div className="form-group">
-        <label htmlFor="id">Skill</label>
+        <label className="form-label" htmlFor="id">
+          Skill Name <span className="help-text">(Required)</span>
+        </label>
         <input
+          className="form-input"
           id="id"
           type="text"
           name="id"
@@ -43,8 +46,11 @@ const SkillForm = props => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="description">Definition</label>
+        <label className="form-label" htmlFor="description">
+          Definition
+        </label>
         <textarea
+          className="form-input"
           id="description"
           name="description"
           value={skill.description}
@@ -52,8 +58,11 @@ const SkillForm = props => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="group">Group</label>
+        <label className="form-label" htmlFor="group">
+          Group
+        </label>
         <input
+          className="form-input"
           id="group"
           type="number"
           name="group"
@@ -62,8 +71,11 @@ const SkillForm = props => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="weight">Weight</label>
+        <label className="form-label" htmlFor="weight">
+          Weight
+        </label>
         <input
+          className="form-input"
           id="weight"
           type="number"
           name="weight"
@@ -72,8 +84,10 @@ const SkillForm = props => {
         />
       </div>
       <div className="form-actions">
-        <button>Save Skill</button>
-        <button onClick={reset}>Reset</button>
+        <button className="primary">Save Skill</button>
+        <button className="secondary" onClick={reset}>
+          Reset
+        </button>
       </div>
     </form>
   )

@@ -21,12 +21,11 @@ const App = () => {
   }, [])
 
   const addSkill = skill => {
-    setData([...data, { ...skill, key: data.length }].sort(byId))
-  }
-
-  const updateSkill = (skill, updatedSkill) => {
     setData(
-      [...data.filter(element => element !== skill), updatedSkill].sort(byKey)
+      [
+        ...data.filter(element => element.key !== skill.key),
+        { ...skill, key: data.length }
+      ].sort(byId)
     )
   }
 

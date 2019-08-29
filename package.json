@@ -8,7 +8,7 @@
     "start:web": "webpack-dev-server --mode development --open",
     "dev": "webpack --mode development --module-bind js=babel-loader",
     "build": "webpack --mode production --module-bind js=babel-loader",
-    "start:api": "babel-node ./api/index.js",
+    "start:api": "nodemon --exec babel-node ./api/index.js",
     "seed": "babel-node ./api/seed.js"
   },
   "repository": {

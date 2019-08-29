@@ -1,13 +1,15 @@
-body {
+body,
+textarea {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-body .form {
-  float: left;
+.form {
+  position: fixed;
+  left: 50%;
   width: 50%;
 }
 
-body .form label {
+.form .form-label {
   display: inline-block;
   width: 200px;
   text-align: right;
@@ -15,12 +17,29 @@ body .form label {
   margin: 10px 5px;
 }
 
-body .form .form-actions {
+.form .form
+
+.form .form-actions {
   margin: 10px 5px 10px 205px;
   display: block;
 }
 
-body table {
+table {
   float: left;
   width: 50%;
+}
+
+table thead tr {
+  display: block;
+}
+
+table th,
+table td {
+  min-width: 100px;
+}
+
+table tbody {
+  display: block;
+  height: 100vh;
+  overflow: auto;
 }
