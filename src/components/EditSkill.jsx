@@ -8,7 +8,7 @@ const EditSkill = props => {
     setSkill({ ...skill, [event.target.name]: event.target.value })
   }
   const handleKeyPress = event => {
-    if (event.key === "Enter") save()
+    if (event.key === "Enter") update()
   }
   const update = () => {
     props.edit(skill)

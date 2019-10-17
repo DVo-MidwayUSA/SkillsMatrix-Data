@@ -5,16 +5,33 @@ import Skill from "./components/Skill.jsx"
 import NewSkill from "./components/NewSkill.jsx"
 import SaveControl from "./components/SaveControl.jsx"
 
+const API_URL = "http://localhost:8888/api/nodes"
+
 const App = () => {
   const [data, setData] = useState([])
 
+  const getData = () =>
+    new Promise(resolve => {
+      fetch(API_URL)
+        .then(response => {
+          return response.json()
+        })
+        .then(data => {
+          resolve(data)
+        })
+    })
+
   useEffect(() => {
-    fetch("http://localhost:8888/api/nodes")
-      .then(response => {
-        return response.json()
-      })
-      .then(setData)
+    getData().then(data => {
+      setData([...data])
+    })
   }, [])
+
+  const reset = () => {
+    getData().then(data => {
+      setData([...data])
+    })
+  }
 
   const remove = skill => {
     setData([...data.filter(element => element.key !== skill.key)])
@@ -90,7 +107,7 @@ const App = () => {
         </table>
       </div>
       <div className="form-container column is-one-third">
-        <SaveControl />
+        <SaveControl reset={reset} />
         <NewSkill add={add} />
       </div>
     </div>
