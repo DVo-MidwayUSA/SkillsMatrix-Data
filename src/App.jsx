@@ -1,34 +1,24 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import ReactDOM from "react-dom"
 
 import Skill from "./components/Skill.jsx"
 import NewSkill from "./components/NewSkill.jsx"
 import SaveControl from "./components/SaveControl.jsx"
-
-const API_URL = "http://localhost:8888/api/nodes"
+import DataAccessContext from "./components/DataAccess/index.js"
 
 const App = () => {
   const [data, setData] = useState([])
 
-  const getData = () =>
-    new Promise(resolve => {
-      fetch(API_URL)
-        .then(response => {
-          return response.json()
-        })
-        .then(data => {
-          resolve(data)
-        })
-    })
+  const dataAccess = useContext(DataAccessContext)
 
   useEffect(() => {
-    getData().then(data => {
+    dataAccess.get().then(data => {
       setData([...data])
     })
   }, [])
 
   const reset = () => {
-    getData().then(data => {
+    dataAccess.get().then(data => {
       setData([...data])
     })
   }
@@ -59,7 +49,7 @@ const App = () => {
 
   const bySkill = (a, b) => {
     let comparison = 0
-    if (a.id.toUpperCase() > b.id.toUpperCase()) comparison = 1
+    if (String(a.id).toUpperCase() > String(b.id).toUpperCase()) comparison = 1
     else comparison = -1
     return comparison
   }
