@@ -1,12 +1,25 @@
 import React, { useState } from "react"
 
-const NewSkill = () => {
-  const [skill, setSkill] = useState({})
+import FormButtonControl from "./FormButtonControl.jsx"
+
+const NewSkill = props => {
+  const initialSkill = {
+    id: "",
+    description: "",
+    group: "",
+    weight: ""
+  }
+  const [skill, setSkill] = useState({ ...initialSkill })
   const handleChange = event => {
     setSkill({ ...skill, [event.target.name]: event.target.value })
   }
   const handleSubmit = event => {
     event.preventDefault()
+  }
+
+  const reset = event => {
+    event.preventDefault()
+    setSkill({ ...initialSkill })
   }
   return (
     <div className="form-container column is-one-third">
@@ -38,9 +51,8 @@ const NewSkill = () => {
                 className="textarea"
                 type="text"
                 name="description"
-                onChange={handleChange}>
-                {skill.description}
-              </textarea>
+                onChange={handleChange}
+                value={skill.description}></textarea>
             </div>
           </div>
           <div className="field">
@@ -67,18 +79,7 @@ const NewSkill = () => {
               />
             </div>
           </div>
-
-          {skill.id ? (
-            <button className="button is-primary" type="submit">
-              Add {skill.id}
-            </button>
-          ) : (
-            <button className="button is-primary" disabled>
-              Add Skill
-            </button>
-          )}
-
-          <button className="button is-text">Cancel</button>
+          <FormButtonControl skill={skill.id} reset={reset} />
         </form>
       </div>
     </div>
