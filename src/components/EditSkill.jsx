@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 
+import EmphasisSelectControl from "./EmphasisSelectControl.jsx"
+
 const EditSkill = props => {
   const [skill, setSkill] = useState({ ...props.skill })
   const handleChange = event => {
@@ -8,14 +10,14 @@ const EditSkill = props => {
   const handleKeyPress = event => {
     if (event.key === "Enter") save()
   }
-  const save = () => {
-    props.set(skill)
+  const update = () => {
+    props.edit(skill)
     props.makeReadonly()
   }
   return (
     <tr className="is-selected">
       <td>
-        <button className="button is-text" onClick={save}>
+        <button className="button is-text" onClick={update}>
           <span className="icon is-small">
             <i className="fas fa-save"></i>
           </span>
@@ -42,13 +44,9 @@ const EditSkill = props => {
         />
       </td>
       <td>
-        <input
-          className="input"
-          type="text"
-          name="group"
-          value={skill.group}
-          onChange={handleChange}
-          onKeyPress={handleKeyPress}
+        <EmphasisSelectControl
+          group={skill.group}
+          handleChange={handleChange}
         />
       </td>
       <td>

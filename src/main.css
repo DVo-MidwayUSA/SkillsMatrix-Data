@@ -9,6 +9,6 @@
   padding: 2em;
 }
 
-.table-container table {
-  margin: 1.5em;
+table thead a {
+  color: #363636;
 }

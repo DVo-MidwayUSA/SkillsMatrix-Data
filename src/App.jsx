@@ -19,28 +19,76 @@ const App = () => {
     setData([...data.filter(element => element.key !== skill.key)])
   }
 
+  const edit = skill => {
+    setData(
+      [...data.filter(element => element.key !== skill.key), { ...skill }].sort(
+        bySkill
+      )
+    )
+  }
+
+  const add = skill => {
+    setData([...data, { ...skill }].sort(bySkill))
+  }
+
+  const sortBySkill = () => {
+    setData([...data].sort(bySkill))
+  }
+
+  const sortByGroup = () => {
+    setData([...data].sort(byGroup))
+  }
+
+  const bySkill = (a, b) => {
+    let comparison = 0
+    if (a.id.toUpperCase() > b.id.toUpperCase()) comparison = 1
+    else comparison = -1
+    return comparison
+  }
+
+  const byGroup = (a, b) => {
+    let comparison = 0
+    if (String(a.group).toUpperCase() > String(b.group).toUpperCase())
+      comparison = 1
+    else comparison = -1
+    return comparison
+  }
+
   return (
     <div className="columns">
-      <div className="column is-two-thirds table-container">
-        <table className="table is-striped is-narrow">
+      <div className="column is-two-thirds">
+        <table className="table is-striped is-hoverable is-fullwidth">
           <thead>
             <tr>
               <th>&nbsp;</th>
-              <th>Skill</th>
+              <th>
+                <a title="Sort by Skill" onClick={sortBySkill}>
+                  Skill
+                </a>
+              </th>
               <th>Description</th>
-              <th>Emphasis</th>
+              <th>
+                <a title="Sort by Emphasis" onClick={sortByGroup}>
+                  Emphasis
+                </a>
+              </th>
               <th>Weight</th>
               <th>&nbsp;</th>
             </tr>
           </thead>
           <tbody>
             {data.map((skill, index) => (
-              <Skill remove={remove} key={skill.id + index} skill={skill} />
+              <Skill
+                key={skill.id + index}
+                edit={edit}
+                remove={remove}
+                skill={skill}
+              />
             ))}
           </tbody>
         </table>
       </div>
-      <NewSkill />
+      <NewSkill add={add} />
     </div>
   )
 }

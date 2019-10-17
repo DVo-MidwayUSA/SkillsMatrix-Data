@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 
+import EmphasisSelectControl from "./EmphasisSelectControl.jsx"
 import FormButtonControl from "./FormButtonControl.jsx"
 
 const NewSkill = props => {
@@ -15,6 +16,8 @@ const NewSkill = props => {
   }
   const handleSubmit = event => {
     event.preventDefault()
+    props.add(skill)
+    reset(event)
   }
 
   const reset = event => {
@@ -52,18 +55,20 @@ const NewSkill = props => {
                 type="text"
                 name="description"
                 onChange={handleChange}
-                value={skill.description}></textarea>
+                value={skill.description}
+                placeholder="e.g. Progamming language used by browsers and Node.js, applicable in client and server environments"></textarea>
             </div>
+            <p className="help">
+              Contextual explanation of technical skill, including usage or
+              application to job role
+            </p>
           </div>
           <div className="field">
             <label className="label">Area of Emphasis</label>
             <div className="control">
-              <input
-                className="input"
-                type="text"
-                name="group"
-                value={skill.group}
-                onChange={handleChange}
+              <EmphasisSelectControl
+                group={skill.group}
+                handleChange={handleChange}
               />
             </div>
           </div>
@@ -76,8 +81,13 @@ const NewSkill = props => {
                 name="weight"
                 value={skill.weight}
                 onChange={handleChange}
+                placeholder="eg. 0"
               />
             </div>
+            <p className="help">
+              Importance to EC area based on staffing needs, scale of 0-5 with
+              "0" values representing a core need
+            </p>
           </div>
           <FormButtonControl skill={skill.id} reset={reset} />
         </form>

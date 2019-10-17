@@ -3,7 +3,6 @@ import ReadSkill from "./ReadSkill.jsx"
 import EditSkill from "./EditSkill.jsx"
 
 const Skill = props => {
-  const [skill, setSkill] = useState({ ...props.skill })
   const [editable, setEditable] = useState(false)
 
   const makeEditable = () => {
@@ -15,9 +14,13 @@ const Skill = props => {
   }
 
   return editable ? (
-    <EditSkill set={setSkill} makeReadonly={makeReadonly} skill={skill} />
+    <EditSkill
+      edit={props.edit}
+      makeReadonly={makeReadonly}
+      skill={props.skill}
+    />
   ) : (
-    <ReadSkill remove={props.remove} edit={makeEditable} skill={skill} />
+    <ReadSkill remove={props.remove} edit={makeEditable} skill={props.skill} />
   )
 }
 
