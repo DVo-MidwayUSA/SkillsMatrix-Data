@@ -9,13 +9,23 @@ const ReadSkill = props => {
   return (
     <tr>
       <td>
-        <button onClick={props.edit}>Edit</button>
-        <button onClick={remove}>Remove</button>
+        <button className="button is-text" onClick={props.edit}>
+          <span className="icon is-small">
+            <i className="fas fa-edit"></i>
+          </span>
+        </button>
       </td>
       <td>{skill.id}</td>
       <td>{skill.description}</td>
       <td>{skill.group}</td>
       <td>{skill.weight}</td>
+      <td>
+        <button className="button is-text" onClick={remove}>
+          <span className="icon is-small">
+            <i className="far fa-trash-alt"></i>
+          </span>
+        </button>
+      </td>
     </tr>
   )
 }

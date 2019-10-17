@@ -10,16 +10,26 @@ const EditSkill = props => {
     props.makeReadonly()
   }
   return (
-    <tr>
+    <tr className="is-selected">
       <td>
-        <button onClick={save}>Save</button>
-        <button onClick={props.makeReadonly}>Cancel</button>
-      </td>
-      <td>
-        <input type="text" name="id" value={skill.id} onChange={handleChange} />
+        <button className="button is-text" onClick={save}>
+          <span className="icon is-small">
+            <i className="fas fa-save"></i>
+          </span>
+        </button>
       </td>
       <td>
         <input
+          className="input"
+          type="text"
+          name="id"
+          value={skill.id}
+          onChange={handleChange}
+        />
+      </td>
+      <td>
+        <input
+          className="input"
           type="text"
           name="description"
           value={skill.description}
@@ -28,6 +38,7 @@ const EditSkill = props => {
       </td>
       <td>
         <input
+          className="input"
           type="text"
           name="group"
           value={skill.group}
@@ -36,11 +47,19 @@ const EditSkill = props => {
       </td>
       <td>
         <input
+          className="input"
           type="number"
           name="weight"
           value={skill.weight}
           onChange={handleChange}
         />
+      </td>
+      <td>
+        <button className="button is-text" onClick={props.makeReadonly}>
+          <span className="icon is-small">
+            <i className="fas fa-ban"></i>
+          </span>
+        </button>
       </td>
     </tr>
   )
