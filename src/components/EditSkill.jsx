@@ -5,6 +5,9 @@ const EditSkill = props => {
   const handleChange = event => {
     setSkill({ ...skill, [event.target.name]: event.target.value })
   }
+  const handleKeyPress = event => {
+    if (event.key === "Enter") save()
+  }
   const save = () => {
     props.set(skill)
     props.makeReadonly()
@@ -25,6 +28,7 @@ const EditSkill = props => {
           name="id"
           value={skill.id}
           onChange={handleChange}
+          onKeyPress={handleKeyPress}
         />
       </td>
       <td>
@@ -34,6 +38,7 @@ const EditSkill = props => {
           name="description"
           value={skill.description}
           onChange={handleChange}
+          onKeyPress={handleKeyPress}
         />
       </td>
       <td>
@@ -43,6 +48,7 @@ const EditSkill = props => {
           name="group"
           value={skill.group}
           onChange={handleChange}
+          onKeyPress={handleKeyPress}
         />
       </td>
       <td>
@@ -52,6 +58,7 @@ const EditSkill = props => {
           name="weight"
           value={skill.weight}
           onChange={handleChange}
+          onKeyPress={handleKeyPress}
         />
       </td>
       <td>

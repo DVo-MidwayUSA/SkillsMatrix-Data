@@ -7,7 +7,7 @@ const ReadSkill = props => {
   }
 
   return (
-    <tr>
+    <tr onDoubleClick={props.edit}>
       <td>
         <button className="button is-text" onClick={props.edit}>
           <span className="icon is-small">
