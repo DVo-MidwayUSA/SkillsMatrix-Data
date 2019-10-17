@@ -19,6 +19,9 @@ const EmphasisSelectControl = props => {
         <option value="Performance Optimization">
           Performance Optimization
         </option>
+        <option value="Research &amp; Development">
+          Research &amp; Development
+        </option>
       </select>
     </div>
   )

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom"
 
 import Skill from "./components/Skill.jsx"
 import NewSkill from "./components/NewSkill.jsx"
+import SaveControl from "./components/SaveControl.jsx"
 
 const App = () => {
   const [data, setData] = useState([])
@@ -62,15 +63,15 @@ const App = () => {
             <tr>
               <th>&nbsp;</th>
               <th>
-                <a title="Sort by Skill" onClick={sortBySkill}>
+                <abbr title="Sort by Skill" onClick={sortBySkill}>
                   Skill
-                </a>
+                </abbr>
               </th>
               <th>Description</th>
               <th>
-                <a title="Sort by Emphasis" onClick={sortByGroup}>
+                <abbr title="Sort by Emphasis" onClick={sortByGroup}>
                   Emphasis
-                </a>
+                </abbr>
               </th>
               <th>Weight</th>
               <th>&nbsp;</th>
@@ -88,7 +89,10 @@ const App = () => {
           </tbody>
         </table>
       </div>
-      <NewSkill add={add} />
+      <div className="form-container column is-one-third">
+        <SaveControl />
+        <NewSkill add={add} />
+      </div>
     </div>
   )
 }
